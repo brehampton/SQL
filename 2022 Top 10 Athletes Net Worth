@@ -73,6 +73,6 @@ FROM best_friends
 JOIN athletes a
 ON best_friends.friend1 = a.id
 JOIN athletes b
-ON best_friends.friend2 = b.id
+ON best_friends.friend2 = b.id;
 
 
