@@ -1,0 +1,63 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE athletes (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, networth INTEGER);
+
+INSERT INTO athletes (name, networth) Values ("LeBron James", 127);
+INSERT INTO athletes (name, networth) Values ("Lionel Messi", 122);
+INSERT INTO athletes (name, networth) Values ("Cristiano Ronaldo", 115);
+INSERT INTO athletes (name, networth) Values ("Neymar", 103);
+INSERT INTO athletes (name, networth) Values ("Canelo Alvarez", 89);
+INSERT INTO athletes (name, networth) Values ("Stephen Curry", 86.2);
+INSERT INTO athletes (name, networth) Values ("Kevin Durant", 85.9);
+INSERT INTO athletes (name, networth) Values ("Roger Federer", 85.7);
+INSERT INTO athletes (name, networth) Values ("James Harden", 76);
+INSERT INTO athletes (name, networth) Values ("Tiger Woods", 73.5);
+
+CREATE TABLE sports (id INTEGER PRIMARY KEY AUTOINCREMENT, athlete_id INTEGER, sport TEXT);
+
+INSERT INTO sports (athlete_id, sport) VALUES (1, "Basketball");
+INSERT INTO sports (athlete_id, sport) VALUES (2, "Soccer");
+INSERT INTO sports (athlete_id, sport) VALUES (3, "Soccer");
+INSERT INTO sports (athlete_id, sport) VALUES (4, "Soccer");
+INSERT INTO sports (athlete_id, sport) VALUES (5, "Boxing");
+INSERT INTO sports (athlete_id, sport) VALUES (6, "Basketball");
+INSERT INTO sports (athlete_id, sport) VALUES (7, "Basketball");
+INSERT INTO sports (athlete_id, sport) VALUES (8, "Tennis");
+INSERT INTO sports (athlete_id, sport) VALUES (9, "Basketball");
+INSERT INTO sports (athlete_id, sport) VALUES (10, "Golf");
+
+CREATE TABLE nationality (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, country TEXT);
+
+INSERT INTO nationality (name, country) VALUES ("LeBron James", "USA");
+INSERT INTO nationality (name, country) VALUES ("Lionel Messi", "Argentina");
+INSERT INTO nationality (name, country) VALUES ("Cristiano Ronaldo", "Protugal");
+INSERT INTO nationality (name, country) VALUES ("Neymar", "Brazil");
+INSERT INTO nationality (name, country) VALUES ("Canelo Alvarez", "Mexico");
+INSERT INTO nationality (name, country) VALUES ("Stephen Curry", "USA");
+INSERT INTO nationality (name, country) VALUES ("Kevin Durant", "USA");
+INSERT INTO nationality (name, country) VALUES ("Roger Federer", "Switzerland");
+INSERT INTO nationality (name, country) VALUES ("James Harden", "USA");
+INSERT INTO nationality (name, country) VALUES ("Tiger Woods", "USA");
+
+--Rank Sports by Combined Networth of Athletes--
+
+SELECT sports.sport, SUM(athletes.networth) as top_10_net FROM sports
+JOIN athletes
+ON sports.athlete_id = athletes.id
+GROUP BY sport ORDER BY top_10_net Desc;
+
+--TOP 10 Networth by Country--
+
+SELECT nationality.country, SUM(athletes.networth)as top_10_net  FROM nationality
+JOIN athletes
+ON athletes.name = nationality.name
+GROUP BY country ORDER by top_10_net desc;
+
+--COUNT of Top 10 Networth by Country--
+
+SELECT nationality.country, COUNT(athletes.networth)as count  FROM nationality
+JOIN athletes
+ON athletes.name = nationality.name
+GROUP BY country ORDER by count desc;
+
+
