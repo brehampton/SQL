@@ -39,6 +39,12 @@ INSERT INTO nationality (name, country) VALUES ("Roger Federer", "Switzerland");
 INSERT INTO nationality (name, country) VALUES ("James Harden", "USA");
 INSERT INTO nationality (name, country) VALUES ("Tiger Woods", "USA");
 
+CREATE TABLE best_friends (id INTEGER PRIMARY KEY AUTOINCREMENT, friend1 INTEGER, friend2 INTEGER);
+
+INSERT INTO best_friends (friend1, friend2) VALUES (8, 10);
+INSERT INTO best_friends (friend1, friend2) VALUES (9, 5);
+INSERT INTO best_friends (friend1, friend2) VALUES (6, 4);
+
 --Rank Sports by Combined Networth of Athletes--
 
 SELECT sports.sport, SUM(athletes.networth) as top_10_net FROM sports
@@ -59,5 +65,14 @@ SELECT nationality.country, COUNT(athletes.networth)as count  FROM nationality
 JOIN athletes
 ON athletes.name = nationality.name
 GROUP BY country ORDER by count desc;
+
+--Display Secret Best Friends--
+
+SELECT a.name, b.name
+FROM best_friends
+JOIN athletes a
+ON best_friends.friend1 = a.id
+JOIN athletes b
+ON best_friends.friend2 = b.id
 
 
